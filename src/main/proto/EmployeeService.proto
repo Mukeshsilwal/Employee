@@ -1,0 +1,13 @@
+syntax="proto3";
+package employee;
+import "Employee.proto";
+import "EmployeeRequest.proto";
+import "EmployeeResponse.proto";
+
+service EmployeeService{
+  rpc getEmployee(EmployeeRequest) returns (EmployeeResponse);
+  rpc createEmployee(Employee) returns (Employee);
+  rpc deleteEmployee(EmployeeRequest) returns (EmployeeRequest);
+  rpc updateEmployee(Employee) returns (EmployeeResponse);
+}
+

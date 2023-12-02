@@ -1,0 +1,12 @@
+syntax="proto3";
+package employee;
+
+message EmployeeResponse{
+  int32  id=1;
+  string name=2;
+  string phone=3;
+  string emergency_contact=4;
+  string citizenship=5;
+  int32 date=6;
+  int32 contact_renew_date=7;
+}

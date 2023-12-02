@@ -17,8 +17,8 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -37,6 +37,21 @@ dependencies {
 //    implementation group: 'io.grpc', name: 'grpc-netty', version: '1.59.0'
 	implementation group: 'io.grpc', name: 'grpc-protobuf', version: '1.58.0'
 	implementation group: 'io.grpc', name: 'grpc-stub', version: '1.58.0'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.2.0'
+
+
+}
+configurations {
+    mapstructProcessor
+}
+dependencies {
+    mapstructProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+}
+tasks.withType(JavaCompile) {
+    options.annotationProcessorPath = configurations.mapstructProcessor
 }
 
 protobuf {
