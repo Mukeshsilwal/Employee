@@ -1,0 +1,7 @@
+syntax="proto3";
+package employee;
+
+enum UserRoles{
+  ADMIN=0;
+  USER=1;
+}

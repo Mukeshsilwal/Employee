@@ -9,5 +9,6 @@ service EmployeeService{
   rpc createEmployee(Employee) returns (Employee);
   rpc deleteEmployee(EmployeeRequest) returns (EmployeeRequest);
   rpc updateEmployee(Employee) returns (EmployeeResponse);
+
 }
 

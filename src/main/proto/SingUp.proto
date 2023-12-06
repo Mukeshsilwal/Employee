@@ -1,0 +1,15 @@
+syntax="proto3";
+package employee;
+import "UserRoles.proto";
+
+message SingUp{
+  string name=1;
+  string password=2;
+  string email=3;
+  string phone=4;
+  UserRoles roles=5;
+
+}
+message  RegisterResponse{
+  string status=1;
+}

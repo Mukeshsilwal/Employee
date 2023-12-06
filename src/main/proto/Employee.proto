@@ -1,5 +1,6 @@
 syntax="proto3";
 package employee;
+import "UserRoles.proto";
 
 message Employee{
   int32  id=1;
@@ -10,4 +11,6 @@ message Employee{
   int32 date=6;
   int32 contact_renew_date=7;
   string contract_doc=8;
+  string password=9;
+  repeated UserRoles userRoles=10;
 }

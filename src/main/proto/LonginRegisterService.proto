@@ -1,0 +1,10 @@
+syntax="proto3";
+package employee;
+import "Login.proto";
+import "SingUp.proto";
+
+service LoginLogoutService{
+  rpc login(Login) returns (LoginResponse);
+  rpc register( SingUp) returns (RegisterResponse);
+
+}

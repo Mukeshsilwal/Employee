@@ -4,6 +4,7 @@ import com.EmployeeManagement11.employeeManagement.facad.EmployeeFacade;
 import employee.*;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
+import org.springframework.security.access.annotation.Secured;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class EmployeeEndPoint extends EmployeeServiceGrpc.EmployeeServiceImplBas
         this.employeeFacade = employeeFacade;
     }
 
+    @Secured("ADMIN")
     @Override
     public void getEmployee(EmployeeRequestOuterClass.EmployeeRequest request, StreamObserver<EmployeeResponseOuterClass.EmployeeResponse> responseObserver) {
         EmployeeResponseOuterClass.EmployeeResponse response = employeeFacade.getEmployee(request);

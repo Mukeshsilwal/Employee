@@ -15,6 +15,7 @@ public class AppStartUpRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         tableCreatorClass.tableCreator();
+        tableCreatorClass.tableCreator1();
 
     }
 }

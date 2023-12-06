@@ -1,6 +1,8 @@
 package com.EmployeeManagement11.employeeManagement.config;
 
 import com.EmployeeManagement11.employeeManagement.rpc.EmployeeEndPoint;
+import com.EmployeeManagement11.employeeManagement.rpc.SingUpEndPoint;
+import com.EmployeeManagement11.employeeManagement.security.GrpcAuthenticationInterceptor;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import org.modelmapper.ModelMapper;
@@ -13,8 +15,8 @@ import java.io.IOException;
 public class MyServerConfig {
 
     @Bean
-    public Server server(EmployeeEndPoint endPoint) throws IOException {
-        Server server= ServerBuilder.forPort(8088).addService(endPoint).build();
+    public Server server(EmployeeEndPoint endPoint,SingUpEndPoint singUpEndPoint) throws IOException {
+        Server server= ServerBuilder.forPort(8088).addService(endPoint).addService(singUpEndPoint).intercept(new GrpcAuthenticationInterceptor()).build();
         server.start();
         return server;
     }

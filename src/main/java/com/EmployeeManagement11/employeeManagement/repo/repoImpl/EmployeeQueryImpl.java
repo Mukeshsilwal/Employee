@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeQueryImpl implements EmployeeQuery {
@@ -24,7 +25,7 @@ public class EmployeeQueryImpl implements EmployeeQuery {
     @Override
     public void saveData(Employee employee) {
         try(Connection connection= dataSource.getConnection()) {
-            String query="INSERT INTO employee_manage1(id,name,phone,emergency_contact" +
+            String query="INSERT INTO employee_manage2(id,name,phone,emergency_contact" +
                     ",citizenship,date,contact_renew_date,contract_doc) VALUES (?,?,?,?,?,?,?,?)";
             try(PreparedStatement statement= connection.prepareStatement(query)){
                 statement.setInt(1,employee.getId());
@@ -46,7 +47,7 @@ public class EmployeeQueryImpl implements EmployeeQuery {
     @Override
     public void deleteData(int id) {
         try(Connection connection= dataSource.getConnection()) {
-            String query="DELETE FROM employee_manage1 WHERE id=?";
+            String query="DELETE FROM employee_manage2 WHERE id=?";
             try(PreparedStatement statement= connection.prepareStatement(query)){
                 statement.setInt(1,id);
                 statement.executeQuery();
@@ -60,7 +61,7 @@ public class EmployeeQueryImpl implements EmployeeQuery {
     @Override
     public Employee getData(int id) {
         try(Connection connection= dataSource.getConnection()) {
-            String query="SELECT * FROM employee_manage1 WHERE id=?";
+            String query="SELECT * FROM employee_manage2 WHERE id=?";
             try(PreparedStatement statement= connection.prepareStatement(query)){
                 statement.setInt(1,id);
                 ResultSet resultSet=statement.executeQuery();
@@ -78,7 +79,7 @@ public class EmployeeQueryImpl implements EmployeeQuery {
     @Override
     public Employee updateData(Employee employee) {
         try(Connection connection= dataSource.getConnection()) {
-            String query="UPDATE employee_manage1 SET id=?,name=?,phone=?,emergency_contact=?,citizenship=?,date=?,contact_renew_date=?,contract_doc=? WHERE id=?";
+            String query="UPDATE employee_manage2 SET id=?,name=?,phone=?,emergency_contact=?,citizenship=?,date=?,contact_renew_date=?,contract_doc=? WHERE id=?";
             try(PreparedStatement statement= connection.prepareStatement(query)){
                 statement.setInt(1,employee.getId());
                 statement.setString(2, employee.getName());
@@ -97,7 +98,9 @@ public class EmployeeQueryImpl implements EmployeeQuery {
         return employee;
     }
 
-//    @Override
+
+
+    //    @Override
 //    public List<Employee> getALlData() {
 //        List<Employee> employees;
 //        try (Connection connection = dataSource.getConnection()) {
@@ -123,7 +126,8 @@ public class EmployeeQueryImpl implements EmployeeQuery {
         int data1= resultSet.getInt("date");
         int date2= resultSet.getInt("contact_renew_date");
         String data3= resultSet.getString("contract_doc");
-        return new Employee(id1,name1,phone1,emer,citi,data1,date2,data3);
+        String pass=resultSet.getString("password");
+        return new Employee(id1,name1,phone1,emer,citi,data1,date2,data3,pass);
 
     }
 }

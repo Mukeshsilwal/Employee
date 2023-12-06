@@ -62,7 +62,8 @@ public class EmployeeFacade {
         int date = employee.getDate();
         int contractRenew =employee.getContactRenewDate();
         String contactDoc= employee.getContractDoc();
-        return new Employee(id,name,phone,emergency,citizen,date,contractRenew,contactDoc);
+        String pass=employee.getPassword();
+        return new Employee(id,name,phone,emergency,citizen,date,contractRenew,contactDoc,pass);
     }
     public EmployeeResponseOuterClass.EmployeeResponse toResponse(Employee employee){
         return EmployeeResponseOuterClass.EmployeeResponse.newBuilder().setId(employee.getId())
