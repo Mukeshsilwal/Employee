@@ -14,7 +14,7 @@ public class JwtValidationInterceptor implements ServerInterceptor {
             Metadata.Key.of("Authorization", Metadata.ASCII_STRING_MARSHALLER);
 
 
-    private JwtService jwtService;
+    private final JwtService jwtService;
     private final CustomUserDetailsService userDetails;
 
     public JwtValidationInterceptor(JwtService jwtService, CustomUserDetailsService userDetails) {
@@ -41,18 +41,15 @@ public class JwtValidationInterceptor implements ServerInterceptor {
                     Boolean validateToken = this.jwtService.validationToken(token,userDetails1);
 
                     if (validateToken) {
-                        // Attach username or user details to the call context if needed
                         Context context = Context.current().withValue(Context.key("username"), username);
                         return Contexts.interceptCall(context, serverCall, metadata, serverCallHandler);
                     }
                 }
             } catch (Exception e) {
-                // Handle exceptions (e.g., invalid token)
                 e.printStackTrace();
             }
         }
 
-        // Invalid token or no token provided
         serverCall.close(Status.UNAUTHENTICATED.withDescription("Invalid or missing token"), metadata);
         return new ServerCall.Listener<ReqT>() {};
     }

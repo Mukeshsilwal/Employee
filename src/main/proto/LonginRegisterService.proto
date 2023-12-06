@@ -6,5 +6,4 @@ import "SingUp.proto";
 service LoginLogoutService{
   rpc login(Login) returns (LoginResponse);
   rpc register( SingUp) returns (RegisterResponse);
-
 }
