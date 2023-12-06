@@ -15,7 +15,7 @@ public class SingUpServiceImpl implements SingUpService {
     }
 
     @Override
-    public SingUp createSingUp(SingUp singUp, Roles roles) {
-        return singUpQuery.createSinguP(singUp,roles);
+    public void createSingUp(SingUp singUp, Roles roles) {
+        singUpQuery.createSingUp(singUp,roles);
     }
 }

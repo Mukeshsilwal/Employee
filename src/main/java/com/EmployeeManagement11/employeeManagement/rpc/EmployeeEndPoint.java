@@ -17,8 +17,9 @@ public class EmployeeEndPoint extends EmployeeServiceGrpc.EmployeeServiceImplBas
         this.employeeFacade = employeeFacade;
     }
 
-    @Secured("ADMIN")
+
     @Override
+    @Secured("ROLE_ADMIN")
     public void getEmployee(EmployeeRequestOuterClass.EmployeeRequest request, StreamObserver<EmployeeResponseOuterClass.EmployeeResponse> responseObserver) {
         EmployeeResponseOuterClass.EmployeeResponse response = employeeFacade.getEmployee(request);
         responseObserver.onNext(response);

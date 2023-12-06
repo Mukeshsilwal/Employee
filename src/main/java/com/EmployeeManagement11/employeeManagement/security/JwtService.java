@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtService {
@@ -60,10 +62,14 @@ public class JwtService {
 
     }
 
+
     private String doGenerateToken(Map<String, Object> claims, UserDetails userDetails) {
+        String authorities=userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
         return Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername()).
                 setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+1000*24*60))
+                .claim("auth",authorities)
                 .signWith(getSingInKey(), SignatureAlgorithm.HS256).compact();
     }
     public Boolean validationToken(String token,UserDetails userDetails){

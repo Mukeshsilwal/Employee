@@ -24,7 +24,7 @@ public class SingUp implements UserDetails {
         this.phone = phone;
         this.email = email;
         this.role = role;
-        this.roles = List.of(role);  // Initialize roles list with a single role
+        this.roles = List.of(role);
         this.password = password;
     }
 

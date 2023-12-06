@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface SingUpQuery {
 
-SingUp createSinguP(SingUp singUp,Roles roles);
+void createSingUp(SingUp singUp,Roles roles);
 SingUp findUserByName(String name);
 }

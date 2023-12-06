@@ -23,7 +23,7 @@ public class SingUpImpl implements SingUpQuery {
     }
 
     @Override
-    public SingUp createSinguP(SingUp singUp,Roles roles) {
+    public void createSingUp(SingUp singUp,Roles roles) {
         try(Connection connection= dataSource.getConnection()) {
             String query="INSERT INTO sing_up1 (name,email,phone,role,password) VALUES(?,?,?,?,?)";
             try(PreparedStatement statement= connection.prepareStatement(query)){
@@ -32,13 +32,11 @@ public class SingUpImpl implements SingUpQuery {
                 statement.setString(3, singUp.getPhone());
                 statement.setString(4, roles.name());
                 statement.setString(5,singUp.getPassword());
-
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
     @Override
