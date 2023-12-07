@@ -1,16 +1,14 @@
 package com.EmployeeManagement11.employeeManagement.enitiy;
 
-import employee.UserRolesOuterClass;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SingUp implements UserDetails {
+public class SignUp implements UserDetails {
     private String name;
     private String phone;
     private String email;
@@ -19,7 +17,7 @@ public class SingUp implements UserDetails {
     private Roles role;
     private List<Roles> roles;
 
-    public SingUp(String name, String phone, String email, Roles role, String password) {
+    public SignUp(String name, String phone, String email, Roles role, String password) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -28,7 +26,7 @@ public class SingUp implements UserDetails {
         this.password = password;
     }
 
-    public SingUp() {
+    public SignUp() {
     }
 
     @Override
